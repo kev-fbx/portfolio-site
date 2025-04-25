@@ -82,8 +82,11 @@
     }
 
     .navList {
-        flex-direction: column;
-        gap: 1em;
+        gap: 0.2em;
+        display: flex;
+        flex-direction: row; 
+        justify-content: center;
+        align-items: center;
     }
 
     .navBar li a {
