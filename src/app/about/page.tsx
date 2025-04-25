@@ -6,8 +6,10 @@ import styles from "./about.module.css";
 const About = () => {
   const [images, setImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [nextImageIndex, setNextImageIndex] = useState(0);
   const [fade, setFade] = useState(false);
   const [show, setShow] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     fetch("/api/getImages")
@@ -21,15 +23,23 @@ const About = () => {
     if (images.length === 0) return;
 
     const interval = setInterval(() => {
+      if (isTransitioning) return;
+
+      setIsTransitioning(true);
       setFade(true);
+
+      const nextIndex = (currentImageIndex + 1) % images.length;
+      setNextImageIndex(nextIndex);
+
       setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setCurrentImageIndex(nextIndex);
         setFade(false);
-      }, 500);
+        setIsTransitioning(false);
+      }, 300);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [images]);
+  }, [images, currentImageIndex, isTransitioning]);
 
   return (
     <div className={styles.aboutPage}>
@@ -55,13 +65,22 @@ const About = () => {
         </div>
         <div className={styles.rightBox}>
           {images.length > 0 && (
-            <img
-              src={images[currentImageIndex]}
-              alt="Kevin Tran"
-              className={`${styles.cyclingImage} ${
-                fade ? styles.fadeOut : styles.fadeIn
-              }`}
-            />
+            <>
+              <img
+                src={images[currentImageIndex]}
+                alt="Kevin Tran"
+                className={`${styles.cyclingImage} ${
+                  !fade ? styles.fadeIn : styles.fadeOut
+                }`}
+              />
+              <img
+                src={images[nextImageIndex]}
+                alt="Kevin Tran"
+                className={`${styles.cyclingImage} ${
+                  fade ? styles.fadeIn : styles.fadeOut
+                }`}
+              />
+            </>
           )}
         </div>
       </div>

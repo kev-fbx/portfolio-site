@@ -76,15 +76,19 @@
   object-fit: cover;
   border-radius: 8px;
   position: absolute;
-  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .fadeIn {
   opacity: 1;
+  visibility: visible;
 }
 
 .fadeOut {
   opacity: 0;
+  visibility: hidden;
 }
 
 @media (max-width: 768px) {
