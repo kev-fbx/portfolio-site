@@ -1,115 +1,113 @@
 "use client";
 
-import React, { useState } from 'react';
-import styles from './gallery.module.css';
-import Image from 'next/image';
+import React, { useState, useEffect, useCallback } from "react";
+import styles from "./gallery.module.css";
+import Image from "next/image";
+import { data } from "./imgID";
+
+const _thumbnailSize = 1000;
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
+  const [popupState, setPopupState] = useState<{
+    imgSrc: string | null;
+    isVisible: boolean;
+    isHiding: boolean;
+    dimensions: { width: number; height: number };
+  }>({
+    imgSrc: null,
+    isVisible: false,
+    isHiding: false,
+    dimensions: { width: 0, height: 0 },
+  });
 
-  const handleImageClick = (imgSrc: string): void => {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
+
+  const handleImageClick = useCallback((imgSrc: string) => {
     const img = new window.Image();
     img.src = imgSrc;
     img.onload = () => {
-      setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-      setSelectedImage(imgSrc);
-      setIsPopupVisible(true);
+      setPopupState({
+        imgSrc,
+        isVisible: true,
+        isHiding: false,
+        dimensions: { width: img.naturalWidth, height: img.naturalHeight },
+      });
     };
-  };
+  }, []);
 
-  const closePopup = () => {
-    setIsPopupVisible(false);
-    setSelectedImage(null);
-    setImageDimensions({ width: 0, height: 0 });
-  };
+  const closePopup = useCallback(() => {
+    setPopupState((prevState) => ({
+      ...prevState,
+      isHiding: true,
+    }));
 
-  const data = [
-    {
-      id: 1,
-      imgSrc: '/portfolio/apartmentSunset.png',
-    },
-    {
-      id: 2,
-      imgSrc: '/portfolio/bagel.png',
-    },
-    {
-      id: 3,
-      imgSrc: '/portfolio/balcony.png',
-    },
-    {
-      id: 4,
-      imgSrc: '/portfolio/card.png',
-    },
-    {
-      id: 5,
-      imgSrc: '/portfolio/glass.png',
-    },
-    {
-      id: 6,
-      imgSrc: '/portfolio/lampVP2.png',
-    },
-    {
-      id: 7,
-      imgSrc: '/portfolio/pool.png',
-    },
-    {
-      id: 8,
-      imgSrc: '/portfolio/pumpkin.png',
-    },
-    {
-      id: 9,
-      imgSrc: '/portfolio/star.png',
-    },
-    {
-      id: 10,
-      imgSrc: '/portfolio/pz1.png',
-    },
-    {
-      id: 11,
-      imgSrc: '/portfolio/night.jpg',
-    },
-    {
-      id: 12,
-      imgSrc: '/portfolio/LEIDO_Post_2.png',
-    },
-    {
-      id: 13,
-      imgSrc: '/portfolio/LEIDO_Thumbnail.png',
-    },
-  ]
+    setTimeout(() => {
+      setPopupState({
+        imgSrc: null,
+        isVisible: false,
+        isHiding: false,
+        dimensions: { width: 0, height: 0 },
+      });
+    }, 300);
+  }, []);
 
   return (
-      <>
-        <div className={styles.gallery}>
-          {data.map((item, index) => {
-            return (
-              <div className={styles.img} key={index} onClick={() => handleImageClick(item.imgSrc)}>
-                <div className={styles.imgContainer}>
-                  <Image src={item.imgSrc} alt={`Gallery item ${item.id}`} />
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {isPopupVisible && (
-          <div className={styles.popup} onClick={closePopup}>
-            <div
-              className={styles.popupContent}
-              style={{
-                aspectRatio: `${imageDimensions.width} / ${imageDimensions.height}`,
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button className={styles.closeButton} onClick={closePopup}>×</button>
-              <Image src={selectedImage || ''} alt="Selected item" />
+    <>
+      <div className={`${styles.gallery} ${animate ? styles.fadeUp : ""}`}>
+        {data.map((item, index) => (
+          <div
+            className={styles.img}
+            key={index}
+            onClick={() => handleImageClick(item.imgSrc)}
+          >
+            <div className={styles.imgContainer}>
+              <Image
+                src={item.imgSrc}
+                alt={`Gallery item ${item.id}`}
+                width={_thumbnailSize}
+                height={_thumbnailSize}
+              />
             </div>
           </div>
-        )}
-      </>
-  )
-}
+        ))}
+      </div>
+
+      {popupState.isVisible && (
+        <div className={styles.popup}>
+          {/* Blurred Background */}
+          <div
+            className={`${styles.popupBackground} ${popupState.isHiding ? styles.hide : styles.show
+              }`}
+            onClick={closePopup}
+          ></div>
+
+          {/* Popup Content */}
+          <div
+            className={`${styles.popupContent} ${popupState.isHiding ? styles.hide : styles.show
+              }`}
+            style={{
+              aspectRatio: `${popupState.dimensions.width} / ${popupState.dimensions.height}`,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeButton} onClick={closePopup}>
+              ×
+            </button>
+            <Image
+              src={popupState.imgSrc || ""}
+              alt="Popup image"
+              width={popupState.dimensions.width}
+              height={popupState.dimensions.height}
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default Gallery;

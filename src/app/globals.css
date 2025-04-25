@@ -13,3 +13,12 @@ html {
   text-align: center;
   margin-top: 400px;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
