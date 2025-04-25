@@ -1,11 +1,27 @@
+.homeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .boldHeader {
-    font-family: 'Inter', sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: italic;
-    color: #38556de0;
-    font-size: 12rem;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: italic;
+  color: #38556de0;
+  font-size: clamp(3rem, 12vw, 12rem);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20%);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fadeUp {
+  opacity: 1;
+  transform: translateY(-200px);
 }

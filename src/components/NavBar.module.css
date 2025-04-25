@@ -60,3 +60,34 @@
 .navBar li a:hover::after {
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .navBar {
+        padding: 0.8em 1.5em;
+    }
+
+    .navList {
+        gap: 1.5em;
+    }
+
+    .navBar li a {
+        font-size: 12px;
+        padding: 0.4em 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .navBar {
+        padding: 0.5em 1em;
+    }
+
+    .navList {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .navBar li a {
+        font-size: 10px;
+        padding: 0.3em 0.6em;
+    }
+}
