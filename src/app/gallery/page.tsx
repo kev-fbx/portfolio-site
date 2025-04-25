@@ -12,11 +12,13 @@ const Gallery = () => {
     imgSrc: string | null;
     isVisible: boolean;
     isHiding: boolean;
+    isLoading: boolean;
     dimensions: { width: number; height: number };
   }>({
     imgSrc: null,
     isVisible: false,
     isHiding: false,
+    isLoading: false,
     dimensions: { width: 0, height: 0 },
   });
 
@@ -27,15 +29,25 @@ const Gallery = () => {
   }, []);
 
   const handleImageClick = useCallback((imgSrc: string) => {
+    setPopupState((prev) => ({
+      ...prev,
+      isVisible: true,
+      isLoading: true,
+    }));
+
     const img = new window.Image();
     img.src = imgSrc;
+
     img.onload = () => {
-      setPopupState({
-        imgSrc,
-        isVisible: true,
-        isHiding: false,
-        dimensions: { width: img.naturalWidth, height: img.naturalHeight },
-      });
+      setTimeout(() => {
+        setPopupState({
+          imgSrc,
+          isVisible: true,
+          isHiding: false,
+          isLoading: false,
+          dimensions: { width: img.naturalWidth, height: img.naturalHeight },
+        });
+      }, 300);
     };
   }, []);
 
@@ -50,6 +62,7 @@ const Gallery = () => {
         imgSrc: null,
         isVisible: false,
         isHiding: false,
+        isLoading: false,
         dimensions: { width: 0, height: 0 },
       });
     }, 300);
@@ -80,29 +93,38 @@ const Gallery = () => {
         <div className={styles.popup}>
           {/* Blurred Background */}
           <div
-            className={`${styles.popupBackground} ${popupState.isHiding ? styles.hide : styles.show
-              }`}
+            className={`${styles.popupBackground} ${
+              popupState.isHiding ? styles.hide : styles.show
+            }`}
             onClick={closePopup}
           ></div>
 
           {/* Popup Content */}
           <div
-            className={`${styles.popupContent} ${popupState.isHiding ? styles.hide : styles.show
-              }`}
+            className={`${styles.popupContent} ${
+              popupState.isHiding ? styles.hide : styles.show
+            }`}
             style={{
-              aspectRatio: `${popupState.dimensions.width} / ${popupState.dimensions.height}`,
+              aspectRatio: popupState.isLoading
+                ? "1 / 1"
+                : `${popupState.dimensions.width} / ${popupState.dimensions.height}`,
             }}
             onClick={(e) => e.stopPropagation()}
           >
             <button className={styles.closeButton} onClick={closePopup}>
               ×
             </button>
-            <Image
-              src={popupState.imgSrc || ""}
-              alt="Popup image"
-              width={popupState.dimensions.width}
-              height={popupState.dimensions.height}
-            />
+
+            {popupState.isLoading ? (
+              <div className={styles.loadingSpinner}>Loading...</div>
+            ) : (
+              <Image
+                src={popupState.imgSrc || ""}
+                alt="Popup image"
+                width={popupState.dimensions.width}
+                height={popupState.dimensions.height}
+              />
+            )}
           </div>
         </div>
       )}
