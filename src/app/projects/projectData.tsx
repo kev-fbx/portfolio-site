@@ -1,3 +1,5 @@
+import { describe } from "node:test";
+
 export const data = [
     {
       title: "Blender Contributions",
@@ -10,6 +12,12 @@ export const data = [
       description: "#1 Judge's Choice Award and #9 People's Choice Award for the CISSAxGMC Game Jam 2025.",
       image: "/projectImg/exogenesis.png",
       link: "https://itch.io/jam/cissa-x-umgmc/rate/3388202",
+    },
+    {
+      title: "Hackiethon: Task Surfers",
+      description: "Submission for HacKMelbourne's Hackiethon 2025. A task manager built using React with a fun twist to help you focus.",
+      image: "/projectImg/tasksurfer.png",
+      link: "https://devpost.com/software/please-let-us-win",
     },
     {
       title: "LEIDO",
