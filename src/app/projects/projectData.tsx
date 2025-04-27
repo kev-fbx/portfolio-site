@@ -18,6 +18,12 @@ export const data = [
       link: "https://devpost.com/software/please-let-us-win",
     },
     {
+      title: "Design @ CISSA",
+      description: "Enhance visuals of student-led university association using 3D animation.",
+      image: "/projectImg/CODEBREW_WS_ASCII_Potion_Red_1_noBG.png",
+      link: "https://www.instagram.com/cissa_unimelb/",
+    },
+    {
       title: "LEIDO",
       description: "Animator for a  YouTube channel that reels  people into the world of Project Zomboid through 3D animation.",
       image: "/projectImg/LEIDO.png",
