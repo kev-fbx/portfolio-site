@@ -39,7 +39,7 @@ const About = () => {
         setFade(false);
         setIsTransitioning(false);
       }, 300);
-    }, 2000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [images, currentImageIndex, isTransitioning]);
