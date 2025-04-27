@@ -3,7 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react"
-import { SceneWrapper } from "@/components/SceneWrapper";
+import { BackgroundSceneWrapper } from "@/components/SceneWrapper";
 
 export const metadata: Metadata = {
   title: "Kevin | Portfolio",
@@ -21,7 +21,7 @@ export default function RootLayout({
       <body>
         <Analytics />
         <SpeedInsights />
-        <SceneWrapper />
+        <BackgroundSceneWrapper />
         <NavBar />
         {children}
       </body>
