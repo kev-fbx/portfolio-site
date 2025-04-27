@@ -72,7 +72,6 @@ const About = () => {
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
                 alt="Kevin Tran"
-                priority={currentImageIndex === 0}
                 className={`${styles.cyclingImage} ${fade ? styles.fadeOut : styles.fadeIn}`}
               />
               <Image
