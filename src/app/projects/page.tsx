@@ -6,7 +6,7 @@ import { data } from "./projectData";
 import Image from "next/image";
 import Link from "next/link";
 
-const _thumbnailSize = 1000;
+const _thumbnailSize = 800;
 
 const Projects = () => {
   const [animate, setAnimate] = useState(false);

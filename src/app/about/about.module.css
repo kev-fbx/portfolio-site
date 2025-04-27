@@ -52,7 +52,7 @@
 
 .description {
   font-size: 1rem;
-  color: #666;
+  color: #6e6e6e;
   line-height: 1.5;
 }
 
@@ -77,18 +77,15 @@
   border-radius: 8px;
   position: absolute;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition: opacity 0.9s ease-in-out;
 }
 
 .fadeIn {
   opacity: 1;
-  visibility: visible;
 }
 
 .fadeOut {
   opacity: 0;
-  visibility: hidden;
 }
 
 @media (max-width: 768px) {

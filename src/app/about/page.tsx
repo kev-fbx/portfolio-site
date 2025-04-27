@@ -2,20 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./about.module.css";
+import Image from "next/image";
+
+const _thumbnailSize = 500;
 
 const About = () => {
-  const [images, setImages] = useState<string[]>([]);
+  const [images,            setImages]            = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [nextImageIndex, setNextImageIndex] = useState(0);
-  const [fade, setFade] = useState(false);
-  const [show, setShow] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [nextImageIndex,    setNextImageIndex]    = useState(0);
+  const [fade,              setFade]              = useState(false);
+  const [show,              setShow]              = useState(false);
+  const [isTransitioning,   setIsTransitioning]   = useState(false);
 
   useEffect(() => {
     fetch("/api/getImages")
       .then((res) => res.json())
       .then((data) => setImages(data.images));
-    
+
     setTimeout(() => setShow(true), 100);
   }, []);
 
@@ -36,7 +39,7 @@ const About = () => {
         setFade(false);
         setIsTransitioning(false);
       }, 300);
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [images, currentImageIndex, isTransitioning]);
@@ -66,19 +69,20 @@ const About = () => {
         <div className={styles.rightBox}>
           {images.length > 0 && (
             <>
-              <img
+              <Image
                 src={images[currentImageIndex]}
+                width={_thumbnailSize}
+                height={_thumbnailSize}
                 alt="Kevin Tran"
-                className={`${styles.cyclingImage} ${
-                  !fade ? styles.fadeIn : styles.fadeOut
-                }`}
+                className={`${styles.cyclingImage} ${fade ? styles.fadeOut : styles.fadeIn}`}
               />
-              <img
+              <Image
                 src={images[nextImageIndex]}
+                width={_thumbnailSize}
+                height={_thumbnailSize}
                 alt="Kevin Tran"
-                className={`${styles.cyclingImage} ${
-                  fade ? styles.fadeIn : styles.fadeOut
-                }`}
+                className={`${styles.cyclingImage} ${fade ? styles.fadeIn : styles.fadeOut
+                  }`}
               />
             </>
           )}
