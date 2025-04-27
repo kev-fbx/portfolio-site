@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./about.module.css";
 import Image from "next/image";
 
-const _thumbnailSize = 500;
-
 const About = () => {
   const [images,            setImages]            = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -71,18 +69,18 @@ const About = () => {
             <>
               <Image
                 src={images[currentImageIndex]}
-                width={_thumbnailSize}
-                height={_thumbnailSize}
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
                 alt="Kevin Tran"
+                priority={currentImageIndex === 0}
                 className={`${styles.cyclingImage} ${fade ? styles.fadeOut : styles.fadeIn}`}
               />
               <Image
                 src={images[nextImageIndex]}
-                width={_thumbnailSize}
-                height={_thumbnailSize}
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
                 alt="Kevin Tran"
-                className={`${styles.cyclingImage} ${fade ? styles.fadeIn : styles.fadeOut
-                  }`}
+                className={`${styles.cyclingImage} ${fade ? styles.fadeIn : styles.fadeOut}`}
               />
             </>
           )}
