@@ -46,3 +46,23 @@
   .wip a:hover {
     color: #1a2632;
   }
+
+  @media (max-width: 768px) {
+    .boldHeader {
+      font-size: 2rem;
+    }
+
+    .wip {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .boldHeader {
+      font-size: 1.5rem;
+    }
+
+    .wip {
+      font-size: 0.8rem;
+    }
+  }
