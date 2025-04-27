@@ -5,7 +5,7 @@ import styles from "./gallery.module.css";
 import Image from "next/image";
 import { data } from "./imgID";
 
-const _thumbnailSize = 1000;
+const _thumbnailSize = 300;
 
 const Gallery = () => {
   const [popupState, setPopupState] = useState<{
@@ -83,6 +83,10 @@ const Gallery = () => {
                 alt={`Gallery item ${item.id}`}
                 width={_thumbnailSize}
                 height={_thumbnailSize}
+                priority={index < 4}
+                loading={index < 4 ? "eager" : "lazy"}
+                sizes="(max-width: 768px) 100vw, 300px"
+                quality={75}
               />
             </div>
           </div>
