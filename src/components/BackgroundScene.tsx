@@ -27,29 +27,31 @@ export function ThreeScene() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     canvasContainer.appendChild(renderer.domElement);
 
+    scene.fog = new THREE.Fog(0xfffcf5, 17, 20);
+
     let globe: THREE.Object3D | null = null;
     const loader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderConfig({ type: 'js' })
-    dracoLoader.setDecoderPath("'https://www.gstatic.com/draco/v1/decoders/'");
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
     loader.setDRACOLoader(dracoLoader);
 
-    loader.load("/assets/models/home2.glb", (gltf) => {
+    loader.load("/assets/models/portfolioWorld.glb", (gltf) => {
       globe = gltf.scene;
       scene.add(gltf.scene);
     }, undefined, function (error) { console.error(error); });
 
-    camera.position.z = 3;
-    camera.position.y = 1.2;
+    camera.position.z = 20;
+    camera.position.y = 2;
+    camera.rotation.x = -0.015;
 
     const animate = () => {
       if (globe) {
-        globe.rotation.z += 0.0015;
-        // globe.rotation.z += 0.005;
+        globe.rotation.y -= 0.0015;
       }
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
     };
+
     animate();
 
     const handleResize = () => {
