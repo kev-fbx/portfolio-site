@@ -46,22 +46,23 @@ const About = () => {
     <div className={styles.aboutPage}>
       <div className={`${styles.aboutContainer} ${show ? styles.show : ''}`}>
         <div className={styles.leftBox}>
-          <h1 className={styles.nameHeader}>Kevin Tran</h1>
+          <div className={styles.nameContainer}>
+            <h1 className={styles.nameHeader}>Kevin Tran</h1>
+            <h1 className={styles.nicknameHeader}>// kev.fbx</h1>
+          </div>
           <p className={styles.description}>
             Code, animation, people, food, and everything in between.
             <br />
             <br />
             I started off as a biomedicine student, but after some time I
-            realised what really drove me to get up every morning were
-            computers and art. I now find myself studying my second year of
-            Computer Science at The University of Melbourne, where I am in the
-            communal struggle of getting an internship 😆.
+            realised what really drove me to get up every morning was technology and art. 
+            I now find myself studying my second year of
+            Computer Science at The University of Melbourne, while running a YouTube
+             animation channel with my friend on the side.
             <br />
             <br />
-            I have met the most wonderful people throughout my journey, and I
-            am grateful for the times we have shared. In fact, I intentionally
-            group up with random people in competitions and projects so I can
-            learn from them!
+            Everything I have accomplished has been possible thanks to the support
+            of the wonderful people I have met in my journey—thank you. 
           </p>
         </div>
         <div className={styles.rightBox}>
