@@ -48,7 +48,7 @@ const About = () => {
         <div className={styles.leftBox}>
           <div className={styles.nameContainer}>
             <h1 className={styles.nameHeader}>Kevin Tran</h1>
-            <h1 className={styles.nicknameHeader}>// kev.fbx</h1>
+            <h1 className={styles.nicknameHeader}>&#47;&#47; kev.fbx</h1>
           </div>
           <p className={styles.description}>
             Code, animation, people, food, and everything in between.
