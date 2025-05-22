@@ -62,7 +62,7 @@ const About = () => {
             <br />
             <br />
             Everything I have accomplished has been possible thanks to the support
-            of the wonderful people I have met in my journey—thank you (●'◡'●)
+            of the wonderful people I have met in my journey—thank you (●&apos;◡&apos;●)
           </p>
         </div>
         <div className={styles.rightBox}>
