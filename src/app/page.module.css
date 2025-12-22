@@ -1,40 +1,573 @@
-.homeContainer {
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px;
+  font-family: var(--font-geist-mono);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 0.4fr 1.6fr 1fr 1fr;
+  grid-template-rows:
+    minmax(0, 1fr)
+    minmax(0, 1fr)
+    minmax(0, 1fr)
+    minmax(0, 1.8fr)
+    minmax(72px, 0.2fr);
+  gap: 1% 1%;
+  grid-auto-flow: row;
+  min-height: calc(100vh - 48px);
+  height: calc(100dvh - 48px);
+}
+
+.textArea {
+  grid-area: 1 / 1 / 6 / 3;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--background);
+}
+
+.infoBox {
+  display: contents;
+  background: var(--background);
+}
+
+.portfolio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0% 0%;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "threejsArea threejsArea threejsArea"
+    "threejsArea threejsArea threejsArea"
+    "threejsArea threejsArea threejsArea";
+  grid-area: 1 / 3 / 6 / 6;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.threejsArea {
+  grid-area: threejsArea;
+  display: block;
+  padding: 0;
+  min-height: 0;
+  position: relative;
+}
+
+.threejsOverlay {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #a0a0a0;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.threejsCanvasHost {
+  width: 100%;
+  height: 100%;
+}
+
+.threejsPlaceholder {
+  width: min(520px, 100%);
+  border: 1px dashed var(--border-color);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.threejsKicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.threejsHint {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.barTitle {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    "Name Name Name"
+    ". . .";
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+.name {
+  grid-area: Name;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+}
+
+.textForProject {
+  grid-area: 2 / 1 / 5 / 3;
+  padding: 18px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.footer {
+  grid-area: 5 / 1 / 6 / 3;
   display: flex;
-  justify-content: center;
+  align-items: flex-end;
+  padding: 0 18px 18px;
+  min-height: 0;
+}
+
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.title {
+  font-size: clamp(28px, 3vw + 8px, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-top: 6px;
+  color: var(--title-color);
+}
+
+.subtitle {
+  font-size: clamp(14px, 1.3vw + 8px, 18px);
+  margin-top: 8px;
+  opacity: 0.85;
+}
+
+.sectionTitle {
+  font-size: clamp(12px, 1vw + 8px, 14px);
+  color: var(--title-color);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+
+.bodyText {
+  font-size: clamp(14px, 1.2vw + 8px, 16px);
+  line-height: 1.7;
+  opacity: 0.92;
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  height: 100vh;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footerLabel {
+  font-size: clamp(10px, 0.8vw + 8px, 12px);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+
+.footerLink {
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: clamp(12px, 1vw + 8px, 14px);
+}
+
+.infoBox {
+  display: contents;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  min-height: 160px;
+}
+
+.projectCard:nth-child(3n) {
+  border-right: 0;
+}
+
+.projectCard:nth-last-child(-n + 3) {
+  border-bottom: 0;
+}
+
+.projectHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.projectTitle {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.projectArrow {
+  opacity: 0.7;
+}
+
+.projectDesc {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  z-index: 20;
+  padding: 16px;
+}
+
+.popupCard {
+  width: min(900px, 95vw);
+  height: auto;
+  max-height: 80vh;
+  background: var(--background);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  position: relative;
   overflow: hidden;
 }
 
-.boldHeader {
-  font-family: 'Inter', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: italic;
-  color: #38556de0;
-  font-size: 12rem;
+.popupInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.9fr 1.1fr 1fr 1.3fr 0.7fr;
+  gap: 1% 1%;
+  grid-auto-flow: row;
+  flex: 1;
+  min-height: 0;
+}
+
+.ProjectContainer { 
+  grid-area: 1 / 1 / 6 / 6;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.ProjectImage { 
+  grid-area: 1 / 3 / 6 / 6;
   display: flex;
+  align-items: center;
   justify-content: center;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(10%);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  transition: ease all 0.5s;
+  aspect-ratio: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+  z-index: 1;
 }
 
-.fadeUp {
-  opacity: 1;
-  transform: translateY(-300px);
+.ProjectImage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--background) 0%, rgba(255, 255, 255, 0) 30%);
+  pointer-events: none;
+  z-index: 2;
 }
 
-@media (max-width: 1800px) {
-  .boldHeader {
-    font-size: 8rem;
+.ProjectTitle { 
+  grid-area: 1 / 1 / 2 / 3;
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0 20px;
+  position: relative;
+  z-index: 1;
+  background: var(--background);
+  border-radius: 12px 0 0 12px;
+}
+
+.ProjectLink { 
+  grid-area: 5 / 1 / 6 / 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  gap: 8px;
+  background: var(--background);
+  border-radius: 12px 0 0 12px;
+}
+
+.ProjectAbout { 
+  grid-area: 2 / 1 / 5 / 3;
+  overflow-y: auto;
+  padding: 0 20px 16px 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  background: var(--background);
+  border-radius: 12px 0 0 12px;
+}
+
+.popupImageTag {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+
+.popupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.popupTitle {
+  font-size: 22px;
+  color: var(--title-color);
+}
+
+.popupBody {
+  margin: 12px 0 16px;
+  line-height: 1.6;
+}
+
+.popupLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  height: 34px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: transparent;
+  font-weight: 600;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.closeButton {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.tag {
+  font-size: 12px;
+  padding: 3px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  opacity: 0.85;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .projectCard:hover {
+    background: var(--hover-accent);
+    border-color: var(--hover-accent);
+    color: var(--background);
+  }
+
+  .footerLink:hover {
+    background: var(--hover-accent);
+    border-color: var(--hover-accent);
+    color: var(--background);
+  }
+
+  .popupLink:hover {
+    background: var(--hover-accent);
+    border-color: var(--hover-accent);
+    color: var(--background);
+  }
+
+  .closeButton:hover {
+    background: var(--hover-accent);
+    border-color: var(--hover-accent);
+    color: var(--background);
   }
 }
 
-@media (max-width: 1200px) {
-  .boldHeader {
-    font-size: 5rem;
+@media (max-width: 900px) {
+  .page {
+    padding: 16px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "portfolio"
+      "infoBox";
+    gap: 16px;
+    height: auto;
+    min-height: calc(100dvh - 32px);
+  }
+
+  .textArea {
+    display: none;
+  }
+
+  .portfolio {
+    grid-area: portfolio;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-color: var(--border-color);
+  }
+
+  .infoBox {
+    grid-area: infoBox;
+    display: block;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 18px;
+    background: var(--background);
+  }
+
+  .barTitle {
+    grid-area: auto;
+    padding: 0;
+  }
+
+  .textForProject {
+    grid-area: auto;
+    border: 0;
+    border-radius: 0;
+    padding: 18px 0;
+    overflow: visible;
+  }
+
+  .footer {
+    grid-area: auto;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .popupCard {
+    width: 90vw;
+    max-width: 480px;
+    height: auto;
+    max-height: 90vh;
+    aspect-ratio: unset;
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+  }
+
+  .popupInner {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .ProjectContainer {
+    display: none;
+    filter: none;
+    transform: none;
+  }
+
+  .ProjectImage {
+    display: block;
+    grid-area: auto;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 0;
+  }
+
+  .ProjectImage::before {
+    content: none;
+  }
+
+  .ProjectTitle,
+  .ProjectAbout,
+  .ProjectLink {
+    background: none;
+    backdrop-filter: none;
+    color: var(--text-color);
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .ProjectTitle {
+    padding: 0;
+  }
+
+  .ProjectAbout {
+    padding: 0;
+  }
+
+  .ProjectLink {
+    padding: 12px 0 0 0;
+    gap: 8px;
+  }
+
+  .closeButton,
+  .popupLink {
+    margin: 0;
   }
 }
