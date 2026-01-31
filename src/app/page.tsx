@@ -72,21 +72,21 @@ export default function Home() {
           </header>
 
           <section className={styles.textForProject} aria-label="About and featured project">
-            <h2 className={styles.sectionTitle}>ABOUT</h2>
-            <p className={styles.bodyText}>
-              Studying Computer Science at The University of Melbourne. I love anything to do with 3D graphics. From modelling a caterpillar to optimising 3D gaussian splat rendering. I love it all.
-            </p>
-            <h2 className={styles.sectionTitle}>SKILLS</h2>
-            <p className={styles.bodyText}>
-              <b>LANGUAGES: </b>C++, C#, Java, JavaScript/TypeScript<br />
-              <b>TOOLS & TECH: </b>Three.js, Unity, Godot, Unreal Engine, Visual Studio, Ubuntu Server<br />
-            </p>
             <h2 className={styles.sectionTitle}>EXPERIENCE</h2>
             <p className={styles.bodyText}>
               <b>[OCT '25 - Present]</b> 3D Software Engineer contract at SKAND <br />
               <b>[MAR '25 - Present]</b> Design Officer at CISSA <br />
               <b>[NOV '23 - Present]</b> Freelance 3D Artist on Fiverr <br />
               <b>[APR '23 - Present]</b> Lead 3D Animator for LEIDO <br />
+            </p>
+            <h2 className={styles.sectionTitle}>SKILLS</h2>
+            <p className={styles.bodyText}>
+              <b>LANGUAGES: </b>C++, C#, Java, JavaScript/TypeScript<br />
+              <b>TOOLS & TECH: </b>Three.js, Unity, Godot, Unreal Engine, Visual Studio, Ubuntu Server<br />
+            </p>
+            <h2 className={styles.sectionTitle}>ABOUT</h2>
+            <p className={styles.bodyText}>
+              Studying Computer Science at The University of Melbourne. I love anything to do with 3D graphics. From modelling a caterpillar to optimising 3D gaussian splat rendering. I love it all.
             </p>
           </section>
 
