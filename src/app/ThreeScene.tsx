@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as THREE from "three";
-import { modelScale } from "three/tsl";
 
 type ThreeSceneProps = {
   className?: string;
@@ -154,7 +153,7 @@ export default function ThreeScene({ className, projects, onSelect }: ThreeScene
     const pointer = new THREE.Vector2();
     const raycaster = new THREE.Raycaster();
 
-    const hoverEmissive = hoverColor.clone().multiplyScalar(0.4); // fallback tint for non-textured meshes
+    const hoverEmissive = hoverColor.clone().multiplyScalar(0.4);
 
     const updateHover = () => {
       const intersects = raycaster.intersectObjects(projectMeshes.map((p) => p.mesh), false);
