@@ -24,13 +24,55 @@ export default function Home() {
   }, []);
   const projects = useMemo<Project[]>(
     () => [
-      { id: "p1", title: "LEIDO YouTube Channel", summary: "I lead the 3D animation for LEIDO, a YouTube channel that is focused on storytelling using the video game Project Zomboid as the universe and 3D animation as the medium.\n\nI have also developed numerous tools and software that speeds up our animation pipelines.\n\nMy freelancing on Fiverr is conducted under this alias.", link: "http://www.youtube.com/@LEIDO_PROD", image: "/images/billboard/leido.webp", popupImage: "/images/highlight/leido.webp" },
-      { id: "p2", title: "The Hungry Hungry Caterpillar", summary: "A 3D video game made in Unity where you play as a caterpillar trying to reach the top of the tree!\n\nI was the **lead designer**; I modelled, textured, rigged and animated all but three assets. I also implemented player movement logic and the windy grass shader effect.", link: "https://feit-comp30019.github.io/2025s2/#/team/nicolai-company/play/", image: "/images/billboard/caterpillar.webp", popupImage: "/images/highlight/caterpillar.webp" },
-      { id: "p3", title: "C# Ray Tracer", summary: "This ray tracing program implements a Whitted Illumination shading model and supports OBJ imports using BVH hierarchy for render optimisation. It also supports custom camera transforms, anti-aliasing, depth-of-field, and simple animations.", link: "https://github.com/kev-fbx/csharp-ray-tracer", image: "/images/billboard/rabbit.webp", popupImage: "/images/highlight/rabbit.gif" },
-      { id: "p4", title: "Design at CISSA", summary: "CISSA is the biggest IT student club at The University of Melbourne, and I'm part of their Design Team, creating graphics for social media. \n\nI use Blender to create 3D assets that are used by myself or collaboratively with the Design Team in Figma, allowing us to uniquely integrate 3D elements into our social media, unlike any other club.\n\nIf it has 3D elements, I did it.", link: "https://www.instagram.com/cissa_unimelb/?hl=en", image: "/images/billboard/cissa.webp", popupImage: "/images/highlight/cissa.webp" },
-      { id: "p5", title: "Exogenesis", summary: "Exogenesis is a 3D game that **won Judges Choice** and came ninth in People's choice for the CISSAxGMC Game Jam 2025.\n\nIt was my first ever competition and video game, and I was responsible for the 3D visuals, as well as camera orbiting controls. It even got me under CISSA's radar.\n\nThis is one of my proudest and most significant projects as it was the first application of my 3D skills outside of LEIDO.", link: "https://fchem.itch.io/exogenesis", image: "/images/billboard/exogenesis.webp", popupImage: "/images/highlight/exogenesis.webp" },
-      { id: "p6", title: "Fiverr Freelancing", summary: "Under LEIDO, I am the go-to animator for 3D animations in the Project Zomboid community.\n\nI have created a variety of animations and thumbnails for clients ranging from funny teasers to gripping video introductions.\n\nServices within our gigs include custom model creation, texturing, and of course, animating.", link: "https://www.fiverr.com/users/leido_prod/portfolio?roleIds=", image: "/images/billboard/blender.webp", popupImage: "/images/highlight/blender.gif" },
-      { id: "p7", title: "OpenGL Model Viewer", summary: "This was my first real project that delved into how graphics programming works, and gave me a real understanding of 3D graphics foundations.\n\nThe program implements a basic GLFW window and uses OpenGL to render 3D models to the screen. Models are processed using the Assimp library.", link: "https://github.com/kev-fbx/model-viewer", image: "/images/billboard/bunny.png", popupImage: "/images/highlight/modelview.gif" },
+      { id: "p1", 
+        title: "LEIDO YouTube Channel", 
+        summary: "I lead the 3D animation for LEIDO, the premiere 3D animation YouTube channel in the Project Zomboid community, focused on storytelling and cinematic content.\n\nI have also developed numerous tools and software that speeds up our animation pipelines.\n\nMy freelancing on Fiverr is conducted under this alias.", 
+        link: "http://www.youtube.com/@LEIDO_PROD", 
+        image: "/images/billboard/leido.webp", 
+        popupImage: "/images/highlight/leido.webp" 
+      },
+      { id: "p2", 
+        title: "The Hungry Hungry Caterpillar", 
+        summary: "A 3D video game made in Unity where you play as a caterpillar trying to reach the top of the tree!\n\nI was the **lead designer**; I modelled, textured, rigged and animated all but three assets. I also implemented player movement logic and the windy grass shader effect.",
+        link: "https://feit-comp30019.github.io/2025s2/#/team/nicolai-company/play/",
+        image: "/images/billboard/caterpillar.webp", 
+        popupImage: "/images/highlight/caterpillar.webp" 
+      },
+      { id: "p3", 
+        title: "C# Ray Tracer", 
+        summary: "This ray tracing program implements a Whitted Illumination shading model and supports OBJ imports using BVH hierarchy for render optimisation. It also supports custom camera transforms, anti-aliasing, depth-of-field, and simple animations.", 
+        link: "https://github.com/kev-fbx/csharp-ray-tracer", 
+        image: "/images/billboard/rabbit.webp", 
+        popupImage: "/images/highlight/rabbit.gif" 
+      },
+      { id: "p4", 
+        title: "Motion Design @ CISSA", 
+        summary: "CISSA is the biggest IT student club at The University of Melbourne, and I'm part of their Design Team, creating graphics for social media. \n\nI use Blender and Cinema 4D to create 3D assets and animations that are used by myself or collaboratively with the Design Team in Figma, allowing us to uniquely integrate 3D elements into our social media, unlike any other club.\n\nIf it has 3D elements, I did it.", 
+        link: "https://www.instagram.com/cissa_unimelb/?hl=en", 
+        image: "/images/billboard/cissa.webp", 
+        popupImage: "/images/highlight/cissa.webp" 
+      },
+      { id: "p5", 
+        title: "Exogenesis Video Game", 
+        summary: "Exogenesis is a 3D game that **won Judges Choice** and came ninth in People's choice for the CISSAxGMC Game Jam 2025.\n\nIt was my first ever competition and video game, and I was responsible for the 3D visuals, camera controls and shader programming. It even got me under CISSA's radar.\n\nThis is one of my proudest and most significant projects as it was the first application of my 3D skills outside of LEIDO.", 
+        link: "https://fchem.itch.io/exogenesis", 
+        image: "/images/billboard/exogenesis.webp", 
+        popupImage: "/images/highlight/exogenesis.webp" 
+      },
+      { id: "p6", 
+        title: "3D Design Freelancing", 
+        summary: "Under LEIDO, I am the go-to freelancer for 3D animations in the Project Zomboid community.\n\nI have created a variety of animations and thumbnails for clients ranging from funny teasers to gripping video introductions.\n\nOur services have led to an average **13%** increase in viewer retention and **2%** increase in click-through rates on our clients YouTube content.", 
+        link: "https://www.fiverr.com/users/leido_prod/portfolio?roleIds=", 
+        image: "/images/billboard/blender.webp", 
+        popupImage: "/images/highlight/blender.gif" 
+      },
+      { id: "p7", 
+        title: "3D Model Viewer App", 
+        summary: "This was my first real project that delved into how graphics programming works, and gave me a real understanding of 3D graphics foundations.\n\nThe program implements a basic GLFW window and uses OpenGL to render 3D models to the screen. Models are processed using the Assimp library.", 
+        link: "https://github.com/kev-fbx/model-viewer", 
+        image: "/images/billboard/bunny.png", 
+        popupImage: "/images/highlight/modelview.gif" 
+      },
     ],
     []
   );
@@ -81,8 +123,8 @@ export default function Home() {
             </p>
             <h2 className={styles.sectionTitle}>SKILLS</h2>
             <p className={styles.bodyText}>
+              <b>TOOLS & TECH: </b>Blender, Cinema 4D, Adobe After Effects, Unity, Godot, Three.js<br />
               <b>LANGUAGES: </b>C++, C#, Java, JavaScript/TypeScript<br />
-              <b>TOOLS & TECH: </b>Three.js, Unity, Godot, Unreal Engine, Visual Studio, Ubuntu Server<br />
             </p>
             <h2 className={styles.sectionTitle}>ABOUT</h2>
             <p className={styles.bodyText}>

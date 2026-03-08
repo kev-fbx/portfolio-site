@@ -88,8 +88,56 @@ export default function ThreeScene({ className, projects, onSelect }: ThreeScene
     const edgesGeo = new THREE.EdgesGeometry(planeGeo);
     const borderMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 80 });
 
-    const projectMeshes: { mesh: THREE.Mesh; projectId: string; material: THREE.MeshStandardMaterial }[] = [];
+    const projectMeshes: { mesh: THREE.Mesh; projectId: string; material: THREE.MeshStandardMaterial; label?: THREE.Mesh }[] = [];
     let hovered: THREE.Mesh | null = null;
+
+    const createLabelTexture = (text: string): THREE.Texture => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1024;
+      canvas.height = 512;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("Could not get canvas context");
+
+      ctx.fillStyle = "rgba(0, 0, 0, 0)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#3b5bfd";
+      ctx.font = "bold 64px GoogleSansCode, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const maxWidth = canvas.width - 250;
+      const lineHeight = 80;
+      const words = text.split(" ");
+      const lines: string[] = [];
+      let currentLine = "";
+
+      for (const word of words) {
+        const testLine = currentLine ? currentLine + " " + word : word;
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      }
+      if (currentLine) lines.push(currentLine);
+
+      const totalHeight = lines.length * lineHeight;
+      const startY = (canvas.height - totalHeight) / 2 + lineHeight / 2;
+
+      lines.forEach((line, index) => {
+        ctx.fillText(line, canvas.width / 2, startY + index * lineHeight);
+      });
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.anisotropy = 16;
+      return texture;
+    };
 
     const radius = 1.15;
     projects.forEach((project, idx) => {
@@ -125,8 +173,19 @@ export default function ThreeScene({ className, projects, onSelect }: ThreeScene
       borderLines.position.z = 0.001;
       body.add(borderLines);
       
+      const labelTexture = createLabelTexture(project.title);
+      const labelMaterial = new THREE.MeshBasicMaterial({
+        map: labelTexture,
+        transparent: true,
+        side: THREE.DoubleSide,
+      });
+      const labelGeo = new THREE.PlaneGeometry(0.6, 0.3);
+      const label = new THREE.Mesh(labelGeo, labelMaterial);
+      label.position.y = -0.26;
+      body.add(label);
+      
       ring.add(body);
-      projectMeshes.push({ mesh: body, projectId: project.id, material });
+      projectMeshes.push({ mesh: body, projectId: project.id, material, label });
     });
 
     const resize = () => {
@@ -262,7 +321,13 @@ export default function ThreeScene({ className, projects, onSelect }: ThreeScene
       renderer.domElement.removeEventListener("pointerdown", handlePointerDown);
       renderer.domElement.removeEventListener("pointermove", handlePointerMove);
 
-      projectMeshes.forEach(({ material }) => material.dispose());
+      projectMeshes.forEach(({ material, label }) => {
+        material.dispose();
+        if (label) {
+          (label.material as THREE.Material).dispose();
+          label.geometry.dispose();
+        }
+      });
       planeGeo.dispose();
       renderer.dispose();
 
