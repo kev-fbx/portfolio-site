@@ -46,7 +46,7 @@ export default function Home() {
         popupImage: "/images/highlight/rabbit.gif" 
       },
       { id: "p4", 
-        title: "Motion Design @ CISSA", 
+        title: "Motion Graphic Design @ CISSA", 
         summary: "CISSA is the biggest IT student club at The University of Melbourne, and I'm part of their Design Team, creating graphics for social media. \n\nI use Blender and Cinema 4D to create 3D assets and animations that are used by myself or collaboratively with the Design Team in Figma, allowing us to uniquely integrate 3D elements into our social media, unlike any other club.\n\nIf it has 3D elements, I did it.", 
         link: "https://www.instagram.com/cissa_unimelb/?hl=en", 
         image: "/images/billboard/cissa.webp", 
@@ -110,6 +110,14 @@ export default function Home() {
               <p className={styles.kicker}></p>
               <h1 className={styles.title}>KEVIN TRAN</h1>
               <p className={styles.subtitle}>3D Software Engineer & Artist</p>
+              <div className={styles.titleButtons}>
+                <a className={styles.footerLink} href="/files/Kevin Tran Motion Design Resume.pdf" target="_blank" rel="noreferrer">
+                  RESUME
+                </a>
+                <a className={styles.footerLink} href="https://vimeo.com/1171998403?share=copy&fl=sv&fe=ci" target="_blank" rel="noreferrer">
+                  SHOWREEL
+                </a>
+              </div>
             </div>
           </header>
 
