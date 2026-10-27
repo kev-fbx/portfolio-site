@@ -6,4 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
     });
+
+    document.addEventListener('mouseover', (e) => {
+        cursor.classList.toggle('is-hovering', !!e.target.closest('a, button, .scroll-bar-track'));
+    });
 });
