@@ -18,6 +18,28 @@
     --divider-text-size-mobile: clamp(1.1rem, 4.5vw, 1.6rem);
 }
 
+.project-heading {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: min(11vh, 5vw);
+    line-height: 1;
+    color: var(--color-white);
+    padding-left: var(--content-pad-x);
+}
+
+.logo-cell {
+    align-items: center;
+}
+
+/* the 192% height in styles.css was for overhanging SVG logos */
+@media (min-width: 1101px) {
+    .logo-cell {
+        height: 100%;
+    }
+}
+
 #content-cell {
     padding: 0;
     align-items: stretch;
@@ -146,6 +168,12 @@
 }
 
 @media (max-width: 1100px) {
+    .project-heading {
+        font-size: min(15vh, 12vw);
+        white-space: nowrap;
+        padding-left: 0;
+    }
+
     #content-cell {
         height: auto;
         overflow: visible;

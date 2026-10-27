@@ -37,7 +37,7 @@
     --font-size-body: 2.5rem;
     --font-size-menu: clamp(1.2rem, 2.5vw, 2.5rem);
     --layout-col-left: 52%;
-    --cursor-size: 30px;
+    --cursor-size: 50px;
 }
 
 #custom-cursor {
@@ -45,12 +45,16 @@
     width: var(--cursor-size);
     height: var(--cursor-size);
     background: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    mask: url('../../assets/images/svg/mouse_cursor.svg') no-repeat center / contain;
+    -webkit-mask: url('../../assets/images/svg/mouse_cursor.svg') no-repeat center / contain;
     pointer-events: none;
     z-index: 99999;
-    transform: translate(-50%, -50%);
     transition: width 0.2s, height 0.2s;
     display: block;
+}
+
+#custom-cursor.is-hovering {
+    background: var(--color-accent);
 }
 
 body,
@@ -240,16 +244,22 @@ body {
 
 .scroll-bar-track {
     flex: 1;
-    height: 1px;
+    box-sizing: content-box;
+    height: 2px;
+    /* padding widens the click/drag area without thickening the visible line */
+    padding: 10px 0;
     background: var(--color-white);
+    background-clip: content-box;
     position: relative;
+    touch-action: none;
 }
 
 .scroll-bar-progress {
     position: absolute;
-    top: -1px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
-    height: 3px;
+    height: 8px;
     width: 20%;
     background: var(--color-accent);
 }
