@@ -1,5 +1,5 @@
 (function () {
-  const WHEEL_MULTIPLIER = 2;
+  const WHEEL_MULTIPLIER = 5;
   const ITEMS = '.divider, .project-card';
 
   const content = document.querySelector('.project-content, .project-scroll-bar');
@@ -62,6 +62,33 @@
     progress.style.width = thumb + '%';
     progress.style.left = (travel > 0 ? content.scrollLeft / travel : 0) * (100 - thumb) + '%';
   };
+
+  const track = progress.parentElement;
+  let grab = 0;
+
+  const seek = (evt) => {
+    const bar = track.getBoundingClientRect();
+    const span = bar.width - progress.offsetWidth;
+    const ratio = span > 0 ? Math.min(Math.max((evt.clientX - bar.left - grab) / span, 0), 1) : 0;
+
+    // 'instant' overrides the CSS smooth scrolling so the thumb tracks the pointer
+    content.scrollTo({ left: ratio * (content.scrollWidth - content.clientWidth), behavior: 'instant' });
+  };
+
+  track.addEventListener('pointerdown', (evt) => {
+    const thumb = progress.getBoundingClientRect();
+    const onThumb = evt.clientX >= thumb.left && evt.clientX <= thumb.right;
+
+    grab = onThumb ? evt.clientX - thumb.left : thumb.width / 2;
+    track.setPointerCapture(evt.pointerId);
+    seek(evt);
+  });
+
+  track.addEventListener('pointermove', (evt) => {
+    if (track.hasPointerCapture(evt.pointerId)) {
+      seek(evt);
+    }
+  });
 
   content.addEventListener('scroll', () => window.requestAnimationFrame(update), { passive: true });
   window.addEventListener('resize', update);
